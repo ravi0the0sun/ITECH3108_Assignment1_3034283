@@ -1,0 +1,33 @@
+* {
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 17px;
+}
+body {
+	background-color: rgb(114, 114, 231);
+}
+button {
+}
+input {
+}
+.loginContent {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+}
+.welcomeText {
+}
+.submit {
+	display: flex;
+}
+#loginInput {
+	border: none;
+	border-radius: 10px;
+}
+#loginBtn {
+	padding: 10px;
+	margin-left: 10px;
+	border: none;
+	border-radius: 10px;
+}
