@@ -10,10 +10,17 @@
 	</head>
 	<body>
 		<div class="main">
-			<p class="welcomeText">Welcome To the Chat!!!</p>
-			<div class="submit">
-				<input id="loginInput" placeholder="Username" />
-				<button id="loginBtn" onclick="login()">Login</button>
+			<div class="login">
+				<h1 class="welcomeText">Welcome To the Chat!!!</h1>
+				<div class="submit">
+					<input type="text" id="loginInput" placeholder="Username" />
+					<button id="loginBtn" onclick="login()">Login</button>
+				</div>
+				<div class="errorTag">
+					<p id="errorText"></p>
+				</div>
+				<!-- <a href="./pages/index.html">press</a>
+			<a href="./profile.html">press</a> -->
 			</div>
 		</div>
 	</body>

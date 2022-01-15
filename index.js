@@ -1,7 +1,15 @@
+const errorText = message =>
+	(document.querySelector('#errorText').innerHTML = !message
+		? ``
+		: `Error: ${message}`);
+
 async function login() {
 	const userName = document.getElementById('loginInput').value.toString();
 	try {
-		const userInfo = await fetch('http://localhost:7777/api/users', {
+		if (!userName) {
+			throw new Error('EmptyUsername');
+		}
+		const res = await fetch(`http://localhost:7777/api/users/${userName}`, {
 			method: 'GET',
 
 			headers: {
@@ -9,12 +17,37 @@ async function login() {
 				Accept: 'application/json',
 			},
 		});
-		const data = await userInfo.json();
+		if (res.status === 404) {
+			throw new Error('UsernameNotFound');
+		}
+		const data = await res.json();
+
 		console.log(data);
+
+		errorText('');
+		localStorage.setItem('userName', JSON.stringify(data));
+		window.location.replace('http://localhost:8000/home');
 	} catch (error) {
-		console.log(error);
+		errorHandler(error);
 	}
-	// fetch('http://localhost:7777/api/users', {
-	// 	method: 'GET',
-	// }).then(res => console.log(res));
+}
+
+// TODO: get the document.querySelector shorter
+// function getTag(tag) {
+// 	return (tag = () => document.querySelector(tag));
+// }
+
+function errorHandler(error) {
+	console.log('Error:', error.message);
+	if (error.message === 'EmptyUsername') {
+		// console.log(getTag('#errorText'));
+		errorText('Username Empty!!!');
+	}
+	if (error.message === 'UsernameNotFound') {
+		errorText('Username Not Valid!!!');
+	}
+}
+
+function removeLoginTag() {
+	document.querySelector('.login').innerHTML = '';
 }
