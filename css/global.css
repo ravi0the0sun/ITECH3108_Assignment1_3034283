@@ -7,8 +7,16 @@ body {
 	overflow: hidden;
 }
 button {
+	border: none;
+	border-radius: 0px 10px 10px 0px;
 }
 input {
+}
+a {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
 }
 .main {
 	display: flex;
@@ -35,12 +43,26 @@ input {
 #loginBtn {
 	padding: 10px;
 	margin-left: 10px;
-	border: none;
-	border-radius: 0px 10px 10px 0px;
 }
 .errorTag {
 	display: flex;
 	justify-content: center;
 	color: rgb(245, 84, 84);
 	font-weight: 600;
+}
+
+.errorPage {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#errorCode {
+	font-size: 4em;
+	font-weight: 900;
+}
+
+.hidden {
+	visibility: hidden;
 }

@@ -1,53 +1,9 @@
-const errorText = message =>
-	(document.querySelector('#errorText').innerHTML = !message
-		? ``
-		: `Error: ${message}`);
+import { checkUserName, setUserName } from './js/localStorage.js';
+// check if user has not logged out
+checkLogin();
 
-async function login() {
-	const userName = document.getElementById('loginInput').value.toString();
-	try {
-		if (!userName) {
-			throw new Error('EmptyUsername');
-		}
-		const res = await fetch(`http://localhost:7777/api/users/${userName}`, {
-			method: 'GET',
-
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-			},
-		});
-		if (res.status === 404) {
-			throw new Error('UsernameNotFound');
-		}
-		const data = await res.json();
-
-		console.log(data);
-
-		errorText('');
-		localStorage.setItem('userName', JSON.stringify(data));
-		window.location.replace('http://localhost:8000/home');
-	} catch (error) {
-		errorHandler(error);
+function checkLogin() {
+	if (checkUserName()) {
+		location.replace('http://localhost:8000/pages/home');
 	}
-}
-
-// TODO: get the document.querySelector shorter
-// function getTag(tag) {
-// 	return (tag = () => document.querySelector(tag));
-// }
-
-function errorHandler(error) {
-	console.log('Error:', error.message);
-	if (error.message === 'EmptyUsername') {
-		// console.log(getTag('#errorText'));
-		errorText('Username Empty!!!');
-	}
-	if (error.message === 'UsernameNotFound') {
-		errorText('Username Not Valid!!!');
-	}
-}
-
-function removeLoginTag() {
-	document.querySelector('.login').innerHTML = '';
 }

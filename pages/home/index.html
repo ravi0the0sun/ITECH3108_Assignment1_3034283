@@ -4,24 +4,24 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>ITECH3108</title>
+		<title>Home</title>
 		<link href="/css/global.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/css/home.css" />
 		<script src="./index.js" type="module"></script>
+		<script src="/pages/home/index.js" type="module"></script>
 		<script src="/js/auth.js"></script>
 	</head>
 	<body>
 		<div class="main">
-			<div class="login">
-				<h1 class="welcomeText">Welcome To the Chat!!!</h1>
-				<div class="submit">
-					<input type="text" id="loginInput" placeholder="Username" />
-					<button id="loginBtn" onclick="login()">Login</button>
+			<div class="home hidden">
+				<a href="http://localhost:8000" onclick="logout()" class="logout"
+					>Logout</a
+				>
+				<h1 class="welcomeText"></h1>
+				<div class="topics">
+					<p id="topicsText">Topics</p>
+					<button id="newTopic">New Topic</button>
 				</div>
-				<div class="errorTag">
-					<p id="errorText"></p>
-				</div>
-				<!-- <a href="./pages/index.html">press</a>
-			<a href="./profile.html">press</a> -->
 			</div>
 		</div>
 	</body>
