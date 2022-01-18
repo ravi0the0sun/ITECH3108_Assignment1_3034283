@@ -10,6 +10,7 @@
 		<script src="./index.js" type="module"></script>
 		<script src="/pages/home/index.js" type="module"></script>
 		<script src="/js/auth.js"></script>
+		<script src="/js/createNewTopic.js"></script>
 	</head>
 	<body>
 		<div class="main">
@@ -19,8 +20,14 @@
 				>
 				<h1 class="welcomeText"></h1>
 				<div class="topics">
-					<p id="topicsText">Topics</p>
-					<button id="newTopic">New Topic</button>
+					<div class="topicsTab">
+						<p id="topicsText">Topics</p>
+						<button id="newTopic" onclick="createNewTopicInput()">
+							New Topic
+						</button>
+					</div>
+
+					<div class="topicsBlock"></div>
 				</div>
 			</div>
 		</div>

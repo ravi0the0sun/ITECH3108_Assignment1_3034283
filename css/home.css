@@ -3,13 +3,41 @@
 	justify-content: end;
 }
 
-.topics {
+.topicsTab {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	padding-bottom: 10px;
+}
+#newTopic {
+	padding: 10px;
+}
+#topicsText,
+#newTopic {
+	font-weight: 700;
 }
 
-.hidden {
-	visibility: hidden;
+.topicsBlock {
+	display: flex;
+	flex-direction: column;
+	background-color: rgb(255, 255, 255);
+	border-radius: 20px;
+	align-items: flex-start;
+	padding: 30px;
 }
+
+.topicText {
+	padding-bottom: 10px;
+}
+
+.replyDiv {
+	display: flex;
+	justify-content: center;
+}
+
+.replyInput,
+.replyBtn {
+	padding: 10px;
+}
+
