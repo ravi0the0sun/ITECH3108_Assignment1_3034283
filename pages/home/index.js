@@ -27,19 +27,18 @@ async function getTopics() {
 			},
 		});
 		const topics = await res.json();
-		console.log(topics);
 		topics.map((item, index) => {
 			const topicDiv = document.createElement('div');
 			topicDiv.classList.add('topicDiv');
 			const aTag = createElement('a', item.title);
+			aTag.classList.add('topicTitle');
+
 			if (params.has('id') && params.get('id') === index) {
 				aTag.href = window.location.href;
 			} else {
 				aTag.href = `http://localhost:8000/pages/home?id=${item.id}`;
 			}
-			if (index < topics.length - 1) {
-				topicDiv.classList.add('topicText');
-			}
+			topicDiv.classList.add(`topicText${index + 1}`);
 			topicDiv.appendChild(aTag);
 			topicsBlock.appendChild(topicDiv);
 		});
@@ -75,23 +74,29 @@ async function checkTopic() {
 				},
 			});
 			if (res.status === 404) {
-				throw new Error('UsernameNotFound');
+				throw new Error('TopicNotFound');
 			}
 			const topicData = await res.json();
-			console.log(topicData);
+			addingDeleteBtn(topicData.user, id);
 			const topicsBlock = document
 				.querySelector('.topicsBlock')
 				.getElementsByTagName('div')[topicData.id - 1];
-			console.log(topicsBlock[0]);
 
 			topicData.posts.map(item => {
 				const reply = document.createElement('p');
 				const text = document.createTextNode(item.text);
 				reply.appendChild(text);
+
+				const user = document.createElement('p');
+				user.classList.add('userReply');
+				const userName = document.createTextNode(`-@${item.user}`);
+				user.appendChild(userName);
+
 				topicsBlock.appendChild(reply);
+				topicsBlock.appendChild(user);
 			});
 
-			topicsBlock.appendChild(addingReplyDiv());
+			topicsBlock.appendChild(addingReplyDiv(id));
 		} catch (err) {
 			console.log(err);
 			location.replace('http://localhost:8000/pages');
@@ -99,13 +104,50 @@ async function checkTopic() {
 	}
 }
 
-function addingReplyDiv() {
+function addingDeleteBtn(user, id) {
+	const { username } = JSON.parse(localStorage.getItem('userName'));
+	if (user === username) {
+		const topicTitleDiv = document.querySelector(`.topicText${id}`);
+		const deleteTag = document.createElement('a');
+		const textNode = document.createTextNode('(delete)');
+		deleteTag.onclick = () => deleteTopic(id, username);
+		deleteTag.href = 'http://localhost:8000/pages/home';
+		deleteTag.appendChild(textNode);
+		topicTitleDiv.appendChild(deleteTag);
+	}
+}
+
+const deleteTopic = async (id, username) => {
+	try {
+		const res = await fetch(`http://localhost:7777/api/topics/${id}`, {
+			method: 'delete',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+			body: JSON.stringify({
+				user: username,
+			}),
+		});
+		const reply = await res.json();
+		console.log(reply);
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+function addingReplyDiv(id) {
 	const replyDiv = document.createElement('div');
 	replyDiv.classList.add('replyDiv');
 
 	const replyInput = document.createElement('input');
 	replyInput.placeholder = 'Reply';
 	replyInput.classList.add('.replyInput');
+	if (replyInput.addEventListener) {
+		replyInput.addEventListener('keyup', () =>
+			localStorage.setItem(`reply${id}`, replyInput.value)
+		);
+	}
 
 	const replyBtn = document.createElement('button');
 	replyBtn.classList.add('replyBtn');
@@ -114,6 +156,10 @@ function addingReplyDiv() {
 
 	replyDiv.appendChild(replyInput);
 	replyDiv.appendChild(replyBtn);
+
+	if (localStorage.getItem(`reply${id}`)) {
+		replyInput.value = localStorage.getItem(`reply${id}`);
+	}
 
 	return replyDiv;
 }

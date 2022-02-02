@@ -48,5 +48,5 @@ function removeLoginTag() {
 }
 
 function logout() {
-	localStorage.removeItem('userName');
+	localStorage.clear();
 }

@@ -41,3 +41,21 @@
 	padding: 10px;
 }
 
+.postDiv {
+	display: flex;
+	justify-content: center;
+	padding: 10px;
+}
+
+.topicInput,
+.topicBtn {
+	padding: 10px;
+}
+
+.userReply {
+	margin-left: 30px;
+}
+
+.topicTitle {
+	padding-right: 10px;
+}
