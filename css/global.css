@@ -4,7 +4,7 @@
 }
 body {
 	background-color: rgb(114, 114, 231);
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 button {
 	border: none;
@@ -24,8 +24,8 @@ a:hover {
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	width: 100vw;
-	height: 100vh;
+	/* width: 100vw;
+	height: 100vh; */
 }
 .welcomeText {
 	display: flex;
@@ -70,4 +70,3 @@ a:hover {
 .hidden {
 	visibility: hidden;
 }
-

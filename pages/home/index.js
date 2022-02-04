@@ -27,21 +27,26 @@ async function getTopics() {
 			},
 		});
 		const topics = await res.json();
-		topics.map((item, index) => {
-			const topicDiv = document.createElement('div');
-			topicDiv.classList.add('topicDiv');
-			const aTag = createElement('a', item.title);
-			aTag.classList.add('topicTitle');
+		console.log(topics);
+		if (topics.length) {
+			topics.map((item, index) => {
+				const topicDiv = document.createElement('div');
+				topicDiv.classList.add('topicDiv');
+				const aTag = createElement('a', item.title);
+				aTag.classList.add('topicTitle');
 
-			if (params.has('id') && params.get('id') === index) {
-				aTag.href = window.location.href;
-			} else {
-				aTag.href = `http://localhost:8000/pages/home?id=${item.id}`;
-			}
-			topicDiv.classList.add(`topicText${index + 1}`);
-			topicDiv.appendChild(aTag);
-			topicsBlock.appendChild(topicDiv);
-		});
+				if (params.has('id') && params.get('id') === index) {
+					aTag.href = window.location.href;
+				} else {
+					aTag.href = `http://localhost:8000/pages/home?id=${item.id}`;
+				}
+				topicDiv.classList.add(`topicText${item.id}`);
+				topicDiv.appendChild(aTag);
+				topicsBlock.appendChild(topicDiv);
+			});
+		} else {
+			addingNoReply();
+		}
 	} catch (err) {
 		console.error(err);
 	}
@@ -78,25 +83,8 @@ async function checkTopic() {
 			}
 			const topicData = await res.json();
 			addingDeleteBtn(topicData.user, id);
-			const topicsBlock = document
-				.querySelector('.topicsBlock')
-				.getElementsByTagName('div')[topicData.id - 1];
-
-			topicData.posts.map(item => {
-				const reply = document.createElement('p');
-				const text = document.createTextNode(item.text);
-				reply.appendChild(text);
-
-				const user = document.createElement('p');
-				user.classList.add('userReply');
-				const userName = document.createTextNode(`-@${item.user}`);
-				user.appendChild(userName);
-
-				topicsBlock.appendChild(reply);
-				topicsBlock.appendChild(user);
-			});
-
-			topicsBlock.appendChild(addingReplyDiv(id));
+			const topicTextDiv = document.querySelector(`.topicText${id}`);
+			mappingReplies(topicData, topicTextDiv);
 		} catch (err) {
 			console.log(err);
 			location.replace('http://localhost:8000/pages');
@@ -108,6 +96,7 @@ function addingDeleteBtn(user, id) {
 	const { username } = JSON.parse(localStorage.getItem('userName'));
 	if (user === username) {
 		const topicTitleDiv = document.querySelector(`.topicText${id}`);
+		console.log(topicTitleDiv);
 		const deleteTag = document.createElement('a');
 		const textNode = document.createTextNode('(delete)');
 		deleteTag.onclick = () => deleteTopic(id, username);
@@ -162,4 +151,31 @@ function addingReplyDiv(id) {
 	}
 
 	return replyDiv;
+}
+
+function mappingReplies(topicData, topicsBlock) {
+	topicData.posts.map(item => {
+		const reply = document.createElement('p');
+		const text = document.createTextNode(item.text);
+		reply.appendChild(text);
+
+		const user = document.createElement('p');
+		user.classList.add('userReply');
+		const userName = document.createTextNode(`-@${item.user}`);
+		user.appendChild(userName);
+
+		topicsBlock.appendChild(reply);
+		topicsBlock.appendChild(user);
+	});
+
+	topicsBlock.appendChild(addingReplyDiv(topicData.id));
+}
+
+function addingNoReply() {
+	const topicsBlock = document.querySelector('.topicsBlock');
+	const textNode = document.createTextNode('No Topics!!!');
+	const heading = document.createElement('h2');
+	heading.classList.add('noReplyMsg');
+	heading.appendChild(textNode);
+	topicsBlock.appendChild(heading);
 }

@@ -10,7 +10,8 @@
 		<script src="./index.js" type="module"></script>
 		<script src="/pages/home/index.js" type="module"></script>
 		<script src="/js/auth.js"></script>
-		<script defer src="/js/createNewTopic.js"></script>
+		<script defer src="/js/createNewTopic.js" type="module"></script>
+		<script defer src="/js/postHandler.js" type="module"></script>
 	</head>
 	<body>
 		<div class="main">
@@ -22,9 +23,7 @@
 				<div class="topics">
 					<div class="topicsTab">
 						<p id="topicsText">Topics</p>
-						<button id="newTopic" onclick="createNewTopicInput()">
-							New Topic
-						</button>
+						<button id="newTopic">New Topic</button>
 					</div>
 
 					<div class="topicsBlock"></div>

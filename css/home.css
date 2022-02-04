@@ -45,6 +45,7 @@
 	display: flex;
 	justify-content: center;
 	padding: 10px;
+	flex-direction: column;
 }
 
 .topicInput,
@@ -58,4 +59,15 @@
 
 .topicTitle {
 	padding-right: 10px;
+}
+
+.noReplyMsg {
+	display: flex;
+}
+
+.postBtn,
+.topicInput,
+.textField {
+	border-radius: 10px;
+	padding: 10px;
 }

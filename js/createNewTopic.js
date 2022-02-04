@@ -1,3 +1,5 @@
+import { createNewPost } from './postHandler.js';
+
 function createNewTopicInput() {
 	const topics = document.querySelector('.topics');
 	const topicCheck = document.querySelector('.topicInput');
@@ -16,18 +18,34 @@ function createNewTopicInput() {
 		if (postCash) {
 			topicInput.value = postCash;
 		}
-
-		console.log(topicInput);
-
+		const textField = document.createElement('textArea');
+		textField.classList.add('textField');
+		textField.placeholder = 'Write Something!!!';
+		const textCash = localStorage.getItem('textCash');
+		if (textField.addEventListener) {
+			textField.addEventListener('keyup', () =>
+				localStorage.setItem('textCash', textField.value)
+			);
+		}
+		if (textCash) {
+			textField.value = textCash;
+		}
 		const topicBtn = document.createElement('button');
+		topicBtn.addEventListener('click', createNewPost);
 		const textNode = document.createTextNode('Post!!!');
+		topicBtn.classList.add('postBtn');
 		topicBtn.appendChild(textNode);
 		postDiv.appendChild(topicInput);
+		postDiv.appendChild(textField);
 		postDiv.appendChild(topicBtn);
+
 		topics.appendChild(postDiv);
 	}
 }
 
-if (localStorage.getItem('postCash')) {
+if (localStorage.getItem('postCash') || localStorage.getItem('textCash')) {
 	createNewTopicInput();
 }
+
+const newTopic = document.querySelector('#newTopic');
+newTopic.addEventListener('click', createNewTopicInput);
