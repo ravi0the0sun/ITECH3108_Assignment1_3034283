@@ -1,4 +1,5 @@
 import { checkUserName } from '/js/localStorage.js';
+import { postReply } from '/js/postHandler.js';
 
 function editWelcomeText() {
 	const userName = JSON.parse(localStorage.getItem('userName'));
@@ -142,7 +143,7 @@ function addingReplyDiv(id) {
 	replyBtn.classList.add('replyBtn');
 	const textNode = document.createTextNode('Reply');
 	replyBtn.appendChild(textNode);
-
+	replyBtn.onclick = () => postReply(id);
 	replyDiv.appendChild(replyInput);
 	replyDiv.appendChild(replyBtn);
 
@@ -179,3 +180,6 @@ function addingNoReply() {
 	heading.appendChild(textNode);
 	topicsBlock.appendChild(heading);
 }
+const refreshWindow = () => location.reload();
+
+setInterval(refreshWindow, 600000);
