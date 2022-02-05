@@ -180,6 +180,11 @@ function addingNoReply() {
 	heading.appendChild(textNode);
 	topicsBlock.appendChild(heading);
 }
-const refreshWindow = () => location.reload();
+const refreshWindow = () => {
+	const params = new URLSearchParams(window.location.search);
+	if (params.has('id')) {
+		location.reload();
+	}
+};
 
-setInterval(refreshWindow, 600000);
+setInterval(refreshWindow, 10000);
