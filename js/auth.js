@@ -34,7 +34,7 @@ async function login() {
 // }
 
 function errorHandler(error) {
-	console.log('Error:', error.message);
+	//console.log('Error:', error.message);
 	if (error.message === 'EmptyUsername') {
 		errorText('Username Empty!!!');
 	}

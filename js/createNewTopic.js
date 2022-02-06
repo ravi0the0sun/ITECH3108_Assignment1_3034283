@@ -35,9 +35,7 @@ function createNewTopicInput() {
 		const textNode = document.createTextNode('Post!!!');
 		topicBtn.classList.add('postBtn');
 		topicBtn.appendChild(textNode);
-		postDiv.appendChild(topicInput);
-		postDiv.appendChild(textField);
-		postDiv.appendChild(topicBtn);
+		postDiv.append(topicInput, textField, topicBtn);
 
 		topics.appendChild(postDiv);
 	}

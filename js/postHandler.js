@@ -17,7 +17,7 @@ export const createNewPost = async () => {
 				}),
 			});
 			const data = await res.json();
-			console.log(data);
+			//console.log(data);
 			localStorage.removeItem('postCash');
 			localStorage.removeItem('textCash');
 			location.reload();
@@ -44,7 +44,7 @@ export const postReply = async id => {
 				}),
 			});
 			const data = await res.json();
-			console.log(data);
+			//console.log(data);
 			localStorage.removeItem(`reply${id}`);
 			location.reload();
 		} catch (err) {
