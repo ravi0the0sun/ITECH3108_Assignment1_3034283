@@ -181,10 +181,10 @@ function addingNoReply() {
 	topicsBlock.appendChild(heading);
 }
 const refreshWindow = () => {
-	const params = new URLSearchParams(window.location.search);
-	if (params.has('id')) {
-		location.reload();
-	}
+	// const params = new URLSearchParams(window.location.search);
+	// if (params.has('id')) {
+	location.reload();
+	// }
 };
 
 setInterval(refreshWindow, 10000);

@@ -1,12 +1,14 @@
-# ITECH3018 Assignemt 1
+# ITECH3018 Assignment 1
 
 Table of Content
 
 1. [Required Software](#required-softwares)
 2. [Setup](#setup)
 3. [Personal Reflection](#personal-reflection)
-4. [Statement of Completion](#statement-of-completion)
-5. [Notes](#notes)
+4. [Statement of Assistance](#statement-of-assistance)
+5. [Statement of Completion](#statement-of-completion)
+6. [Notes](#notes)
+7. [References](#references)
 
 ## Required Softwares
 
@@ -23,19 +25,29 @@ This project uses [`concurrently`](https://www.npmjs.com/package/concurrently) p
 
 ## Personal Reflection
 
+## Statement of Assistance
+
+- Most of the help was provided by developer group from Flex Dapps discord channel where they helped me with flex-box, css tricks and how routing works.
+- Other resources used are listed in the [References](#references) section
+
 ## Statement of Completion
 
-| Implementation                                                | Status             |
-| ------------------------------------------------------------- | ------------------ |
-| • Login screen allows user to type username                   | :white_check_mark: |
-| • Login screen validates username                             | :white_check_mark: |
-| • Topics list displays list of topics                         | :white_check_mark: |
-| • New topics can be created successfully                      | :white_check_mark: |
-| • Topic items can be selected to show posts                   | :white_check_mark: |
-| • Post listing includes both text and display name            | :white_check_mark: |
-| • New posts can be added to a topic                           | :white_check_mark: |
-| • Users can delete their own topics                           | :white_check_mark: |
-| • The page automatically loads new data                       | :white_check_mark: |
-| • Challenge task (optional). Navigation using the History API | :white_check_mark: |
+| Implementation                                              | Status |
+| ----------------------------------------------------------- | ------ |
+| Login screen allows user to type username                   | ✅     |
+| Login screen validates username                             | ✅     |
+| Topics list displays list of topics                         | ✅     |
+| New topics can be created successfully                      | ✅     |
+| Topic items can be selected to show posts                   | ✅     |
+| Post listing includes both text and display name            | ✅     |
+| New posts can be added to a topic                           | ✅     |
+| Users can delete their own topics                           | ✅     |
+| The page automatically loads new data                       | ✅     |
+| Challenge task (optional). Navigation using the History API | ✅     |
 
 ## Notes
+
+- To view markdown file please visit the github repository [here](https://github.com/ravi0the0sun/ITECH3108_Assignment1_3034283)
+- For the option task I unintentionally ended up creating unique addresses for each topic as the link passes id as a URL parameter instead of using History API
+
+## References
