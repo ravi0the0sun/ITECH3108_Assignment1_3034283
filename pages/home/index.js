@@ -1,5 +1,5 @@
 import { checkUserName } from '/js/localStorage.js';
-import { postReply } from '/js/postHandler.js';
+import { postReply, deleteTopic } from '/js/postHandler.js';
 
 function editWelcomeText() {
 	const userName = JSON.parse(localStorage.getItem('userName'));
@@ -114,25 +114,6 @@ function addingDeleteBtn(user, id) {
 		topicTitleDiv.appendChild(deleteTag);
 	}
 }
-
-const deleteTopic = async (id, username) => {
-	try {
-		const res = await fetch(`http://localhost:7777/api/topics/${id}`, {
-			method: 'delete',
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-			},
-			body: JSON.stringify({
-				user: username,
-			}),
-		});
-		const reply = await res.json();
-		//console.log(reply);
-	} catch (err) {
-		console.log(err);
-	}
-};
 
 function addingReplyDiv(id) {
 	const replyDiv = document.createElement('div');

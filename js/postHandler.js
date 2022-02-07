@@ -52,3 +52,22 @@ export const postReply = async id => {
 		}
 	}
 };
+
+export const deleteTopic = async (id, username) => {
+	try {
+		const res = await fetch(`http://localhost:7777/api/topics/${id}`, {
+			method: 'delete',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+			},
+			body: JSON.stringify({
+				user: username,
+			}),
+		});
+		const reply = await res.json();
+		//console.log(reply);
+	} catch (err) {
+		console.log(err);
+	}
+};
